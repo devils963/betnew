@@ -1,0 +1,56 @@
+<section class="pricing-table3 cid-seqhxg1K8q" id="pricing-tables3-6">
+  <div class="container">
+    <div class="media-container-row">
+      <div
+        class="col-12 col-lg-4 col-md-6 col-sm-12 my-2"
+        *ngFor="let gameData of gameData$ | async"
+      >
+        <div class="pricing">
+          <div class="plan-header">
+            <div class="plan-price">
+              <span class="price-value mbr-fonts-style display-7">min.&nbsp;</span>
+              <span class="price-figure mbr-fonts-style display-1">{{
+                gameData.minimalBettingOdd | number:'1.1-2'
+              }}</span>
+              <h3 class="plan-title mbr-fonts-style display-5">
+                <div *ngIf="gameData.homeTeamIsWinningSide">
+                  <strong>{{ gameData.homeTeam }}</strong> vs.
+                  {{ gameData.awayTeam }}
+                </div>
+                <div *ngIf="!gameData.homeTeamIsWinningSide">
+                  {{ gameData.homeTeam }} vs.
+                  <strong>{{ gameData.awayTeam }}</strong>
+                </div>
+              </h3>
+              <hr />
+            </div>
+          </div>
+          <div class="plan-body">
+            <p class="league-paragraph">{{gameData.league}}:</p>
+            <p class="mbr-text mbr-fonts-style display-7">
+              Setze auf
+              <strong
+                ><ng-container *ngIf="gameData.homeTeamIsWinningSide">{{
+                  gameData.homeTeam
+                }}</ng-container>
+                <ng-container *ngIf="!gameData.homeTeamIsWinningSide">{{
+                  gameData.awayTeam
+                }}</ng-container></strong
+              >
+
+              bei einer Quote von mindestens 
+              <strong>{{ gameData.minimalBettingOdd  | number:'1.1-2' }}</strong> für das Spiel gegen 
+              <ng-container *ngIf="gameData.homeTeamIsWinningSide">{{
+                gameData.awayTeam
+              }}</ng-container>
+              <ng-container *ngIf="!gameData.homeTeamIsWinningSide">{{
+                gameData.homeTeam
+              }}</ng-container>
+              am {{ gameData.date | date: 'd.MM.yy' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
