@@ -3,7 +3,7 @@ angular-build:
     - 'docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY'
   image: 'docker:latest'
   script:
-    - 'cd spi-frontend && docker image build --tag registry.gitlab.com/13_mark/spi-soccer-prediction-web-app/spi-soccer-prediction-frontend:latest .'
+    - 'cd spi-frontend && docker image build --tag registry.gitlab.com/13_mark/spi-bet-prediction/spi-soccer-prediction-frontend:latest .'
     - 'docker push registry.gitlab.com/13_mark/spi-bet-prediction/spi-soccer-prediction-frontend:latest'
   services:
     - 'docker:dind'
@@ -26,7 +26,7 @@ console-app-build:
   image: 'docker:latest'
   script:
     - 'cd spi-console-app && docker image build --tag registry.gitlab.com/13_mark/spi-bet-prediction/spi-soccer-prediction-console-app:latest .'
-    - 'docker push registry.gitlab.com/13_mark/spi-soccer-prediction-web-app/spi-soccer-prediction-console-app:latest'
+    - 'docker push registry.gitlab.com/13_mark/spi-bet-prediction/spi-soccer-prediction-console-app:latest'
   services:
     - 'docker:dind'
   stage: build
