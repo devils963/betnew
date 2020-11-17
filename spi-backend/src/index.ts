@@ -7,22 +7,20 @@ import { typeDefs } from './typeDefs';
 
 const DB_HOST = process.argv[2];
 const DB_PORT = process.argv[3];
-
-const corsOptions = {
-  origin: 'https://soccer-prediction.cratory.de',
-  optionsSuccessStatus: 200
-};
+const CREATE_GAME_SECRET = process.argv[4];
 
 const startServer = async () => {
   const app = express();
 
   app.use(cors());
+  
   const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: {createSecret: CREATE_GAME_SECRET}
   });
 
-  server.applyMiddleware({ app, cors: corsOptions });
+  server.applyMiddleware({ app });
 
   await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/prod`, {
     useNewUrlParser: true

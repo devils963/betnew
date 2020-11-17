@@ -28,7 +28,8 @@ export const typeDefs = gql`
       probabilityAwayTeamWin: Float!
       homeTeamIsWinningSide: Boolean!
       minimalBettingOdd: Float!
-      date: String!
+      date: String!,
+      createSecret: String!
     ): Game!
   }
 `;

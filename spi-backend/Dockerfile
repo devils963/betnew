@@ -4,6 +4,8 @@ ENV DB_SERVER_NAME=localhost
 
 ENV DB_SERVER_PORT=2717
 
+ENV CREATE_GAME_SECRET
+
 WORKDIR /usr/graphql-server
 COPY package.json /usr/graphql-server/
 
@@ -15,4 +17,4 @@ COPY ./ /usr/graphql-server
 
 EXPOSE 4000
 
-CMD ["sh", "-c", "node dist/index.js $DB_SERVER_NAME $DB_SERVER_PORT"]
+CMD ["sh", "-c", "node dist/index.js $DB_SERVER_NAME $DB_SERVER_PORT $CREATE_GAME_SECRET"]

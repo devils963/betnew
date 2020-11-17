@@ -18,7 +18,8 @@ export const resolvers = {
   Mutation: {
     createGame: async (
       _: unknown,
-      gameToCreate: IGame
+      gameToCreate: IGame & {createSecret: string},
+      context: {createSecret: string}
     ): mongoose.DocumentQuery<IGame | null, IGame> => {
       const foundGame = await Game.findOne({
         date: gameToCreate.date,
@@ -26,14 +27,20 @@ export const resolvers = {
         awayTeam: gameToCreate.awayTeam
       });
 
-      if (!foundGame) {
-        const game = new Game({
-          ...gameToCreate,
-          id: new mongoose.Types.ObjectId()
-        });
-        return await Game.create(game);
+      if (gameToCreate.createSecret === context.createSecret) {
+        if (!foundGame) {
+          const game = new Game({
+            ...gameToCreate,
+            id: new mongoose.Types.ObjectId()
+          });
+          return await Game.create(game);
+        }
+        return foundGame;
       }
-      return foundGame;
+
+      throw new Error('not allowed to create permutation');
+
+      
     }
   }
 };
