@@ -22,12 +22,12 @@ namespace SpiFootballPrediction.Controller
 
     class GraphQLConnectorController
     {
-        public async Task<bool> SendGamesToServer(Game[] gamesToBetOn) {
+        public async Task<bool> SendGamesToServer(Game[] gamesToBetOn, string createSecret) {
             var graphQLClient = new GraphQLHttpClient("https://graph.cratory.de/graphql", new NewtonsoftJsonSerializer());
             foreach (var game in gamesToBetOn)
             {
                 var mutation = @"
-                    mutation createGame($league: String!, $homeTeam:String!,$awayTeam:String!,$homeProbability:Float!,$awayProbability:Float!,$homeIsWinning:Boolean!,$minimalBettingOdd:Float!,$date:String!) {
+                    mutation createGame($league: String!, $homeTeam:String!,$awayTeam:String!,$homeProbability:Float!,$awayProbability:Float!,$homeIsWinning:Boolean!,$minimalBettingOdd:Float!,$date:String!, $createSecret: String!) {
                         createGame(
                             league: $league
                             homeTeam: $homeTeam
@@ -36,7 +36,8 @@ namespace SpiFootballPrediction.Controller
                             probabilityAwayTeamWin: $awayProbability
                             homeTeamIsWinningSide: $homeIsWinning
                             minimalBettingOdd: $minimalBettingOdd
-                            date: $date
+                            date: $date,
+                            createSecret: $createSecret
                         ) {
                             homeTeam
                             awayTeam
@@ -56,7 +57,8 @@ namespace SpiFootballPrediction.Controller
                     { "awayProbability", game.prob2 },
                     { "homeIsWinning", (game.prob1 > game.prob2) },
                     { "minimalBettingOdd", game.minimalBettingOdd },
-                    { "date", game.date.ToString() }
+                    { "date", game.date.ToString() },
+                    {"createSecret", createSecret }
                 }
                 };
 

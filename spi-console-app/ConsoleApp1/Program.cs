@@ -19,12 +19,13 @@ namespace ConsoleApp1
 
             var args = Environment.GetCommandLineArgs();
 
-            if (args.Length < 2)
+            if (args.Length < 3)
             {
-                throw new Exception("Rapid-Api-Key not defined");
+                throw new Exception("Rapid-Api-Key or CreateSecret not defined");
             }
 
             string apiKey = args[1];
+            string createSecret = args[2];
 
             var oddsController = new OddsController(serviceProvider.GetService<IOddsService>(), serviceProvider.GetService<IDataMatcherService>());
             var spiDataController = new SpiDataController(serviceProvider.GetService<ISpiDataService>());
@@ -46,7 +47,7 @@ namespace ConsoleApp1
                 }
             }
             view.ShowAllGames(gamesToBetOnThisWeek);
-            graphQlController.SendGamesToServer(gamesToBetOnThisWeek).GetAwaiter().GetResult();  
+            graphQlController.SendGamesToServer(gamesToBetOnThisWeek, createSecret).GetAwaiter().GetResult();  
         }
     }
 }
