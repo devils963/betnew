@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start:dev": "npm run build && node dist/index.js localhost 2717",
+    "start:dev": "npm run build && node dist/index.js localhost 2717  ",
     "start:prod": "cross-env NODE_ENV=prod node dist/index.js",
     "prettify": "prettier --write \"**/*.{ts,js,mjs,json,md,html,scss,css}\"",
     "typecheck": "tsc --noEmit --esModuleInterop",

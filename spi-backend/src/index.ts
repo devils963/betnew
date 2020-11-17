@@ -8,6 +8,11 @@ import { typeDefs } from './typeDefs';
 const DB_HOST = process.argv[2];
 const DB_PORT = process.argv[3];
 
+const corsOptions = {
+  origin: 'https://soccer-prediction.cratory.de',
+  optionsSuccessStatus: 200
+};
+
 const startServer = async () => {
   const app = express();
 
@@ -17,7 +22,7 @@ const startServer = async () => {
     resolvers
   });
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: corsOptions });
 
   await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/prod`, {
     useNewUrlParser: true
