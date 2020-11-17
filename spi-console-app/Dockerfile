@@ -3,6 +3,8 @@ WORKDIR /app
 
 ENV RAPID_API_KEY=apiKey
 
+ENV CREATE_SECRET=
+
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY ConsoleApp1/*.csproj ./ConsoleApp1/
@@ -17,6 +19,6 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
 COPY --from=build /app/ConsoleApp1/out ./
 
-CMD ["sh", "-c", "dotnet SpiFootballPrediction.dll $RAPID_API_KEY"]
+CMD ["sh", "-c", "dotnet SpiFootballPrediction.dll $RAPID_API_KEY $CREATE_SECRET"]
 
 
