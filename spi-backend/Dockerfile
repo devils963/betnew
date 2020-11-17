@@ -4,7 +4,7 @@ ENV DB_SERVER_NAME=localhost
 
 ENV DB_SERVER_PORT=2717
 
-ENV CREATE_GAME_SECRET
+ENV CREATE_GAME_SECRET=
 
 WORKDIR /usr/graphql-server
 COPY package.json /usr/graphql-server/
