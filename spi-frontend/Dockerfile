@@ -12,5 +12,3 @@ FROM nginx:1.15.8-alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build  /usr/angular-workdir/dist/mobirise-angular-integration /usr/share/nginx/html
-
-##some change
