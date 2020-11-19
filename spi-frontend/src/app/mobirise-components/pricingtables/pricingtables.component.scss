@@ -8,10 +8,14 @@
 }
 
 .pricing {
-    height: 450px;
+    height: 100%;
 }
 
 .league-paragraph {
     text-decoration: underline;
     margin-bottom: .5rem;
+}
+
+.media-container-row {
+    align-items: stretch;
 }
