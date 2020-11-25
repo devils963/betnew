@@ -10,6 +10,7 @@ import { FooterComponent } from './mobirise-components/footer/footer.component';
 import { PricingtablesComponent } from './mobirise-components/pricingtables/pricingtables.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
+import { SortGamesPipe } from './common/pipes/sort-games.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GraphQLModule } from './graphql.module';
     HeaderComponent,
     ContentComponent,
     FooterComponent,
-    PricingtablesComponent
+    PricingtablesComponent,
+    SortGamesPipe
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { GraphQLModule } from './graphql.module';
     HttpClientModule,
     GraphQLModule
   ],
-  providers: [],
+  providers: [ SortGamesPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

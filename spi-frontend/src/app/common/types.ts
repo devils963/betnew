@@ -6,3 +6,5 @@ export interface Game {
     minimalBettingOdd: number;
     date: Date;
 }
+
+export type GamesSortKeys = 'league' | 'date' | 'minimalBettingOdd';

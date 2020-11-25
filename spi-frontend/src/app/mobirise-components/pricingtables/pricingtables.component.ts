@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { GameService } from 'src/app/common/services/game.service';
-import { Game } from 'src/app/common/types';
+import { Game, GamesSortKeys } from 'src/app/common/types';
 
 @Component({
   selector: 'app-pricingtables',
@@ -9,6 +10,7 @@ import { Game } from 'src/app/common/types';
   styleUrls: ['./pricingtables.component.scss'],
 })
 export class PricingtablesComponent implements OnInit {
+  sortingCriteria?: GamesSortKeys;
   gameData$: Observable<Game[]>;
 
   constructor(private readonly gameService: GameService) {

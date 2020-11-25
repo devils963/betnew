@@ -4,6 +4,7 @@ import { Game } from '../types';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import gql from 'graphql-tag';
+import cloneDeep from 'lodash.clonedeep';
 
 const GAMES_QUERY = gql`
   query {
@@ -48,7 +49,13 @@ export class GameService {
 
   getGamesThisWeek(): Observable<Game[]> {
     return this.apollo
-      .watchQuery<{ gamesThisWeek: Game[] }>({ query: GAMES_THIS_WEEK_QUERY, variables: {} })
-      .valueChanges.pipe(map((apolloResults) => apolloResults.data.gamesThisWeek));
+      .watchQuery<{ gamesThisWeek: Game[] }>({
+        query: GAMES_THIS_WEEK_QUERY,
+        variables: {},
+      })
+      .valueChanges.pipe(
+        map((apolloResults) => apolloResults.data.gamesThisWeek),
+        map((games) => cloneDeep(games)),
+      );
   }
 }
