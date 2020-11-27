@@ -34,18 +34,6 @@ namespace ConsoleApp1
             var view = new GameView();
 
             var gamesToBetOnThisWeek = spiDataController.GetGamesToBetOnThisWeek();
-
-            foreach (var game in gamesToBetOnThisWeek)
-            {
-                try
-                {
-                    game.odd = oddsController.GetBestOddOfGame(game, apiKey);
-                }
-                catch (Exception e)
-                {
-                    game.odd = null;
-                }
-            }
             view.ShowAllGames(gamesToBetOnThisWeek);
             graphQlController.SendGamesToServer(gamesToBetOnThisWeek, createSecret).GetAwaiter().GetResult();  
         }
