@@ -34,17 +34,6 @@ namespace ConsoleApp1.services
             return gamesToBetOnNextWeek.ToArray();
         }
 
-        public Game GetMinimalBettingOddOfGame(int gameId)
-        {
-            var game = _spiDataService.GetGameById(gameId);
-            var highestProbability = game.prob1 > game.prob2 ? game.prob1 : game.prob2;
-            var intervall = SpiProbabilityIntervall.GetIntervall(highestProbability);
-            var accuracy = _spiDataService.GetPredictionAccuracyOfIntervall(intervall);
-            var returnGame = MapToGame(game);
-            returnGame.minimalBettingOdd = 1 / accuracy;
-            return returnGame;
-        }
-
         private Game[] AddMinimalBettingQuoteOnGames(SpiGameData[] games, double minimalBettingQuote)
         {
             var gamesToReturn = new List<Game>(); 

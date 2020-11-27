@@ -56,6 +56,12 @@ export class GameService {
       .valueChanges.pipe(
         map((apolloResults) => apolloResults.data.gamesThisWeek),
         map((games) => cloneDeep(games)),
+        map((games) => {
+          for (const game of games) {
+            game.minimalBettingOdd = Math.ceil(game.minimalBettingOdd * 100) / 100;
+          }
+          return games;
+        })
       );
   }
 }
