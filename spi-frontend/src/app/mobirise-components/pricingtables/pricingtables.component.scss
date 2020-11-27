@@ -15,11 +15,15 @@
 }
 
 .plan-price {
-    height: 160px;
+    @media only screen and (min-width: 768px) {
+        height: 160px;
+    }
 }
 
 .plan-body {
-    height: 200px;
+    @media only screen and (min-width: 768px) {
+        height: 200px;
+    }
 }
 
 .league-paragraph {
@@ -66,4 +70,8 @@
 
 .dropdown-item:last-child {
     padding-top: .5rem;
+}
+
+.display-1 {
+    font-size: 3.5rem;
 }
